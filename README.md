@@ -50,19 +50,5 @@ Este projeto é uma calculadora desenvolvida em Flutter utilizando o padrão de 
    flutter run
    ```
 
-## 🛠️ Como Contribuir
-
-1. Faça um **fork** do projeto
-2. Crie uma **branch** com a nova funcionalidade (`git checkout -b minha-feature`)
-3. Faça o **commit** das mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
-4. Faça o **push** para a branch (`git push origin minha-feature`)
-5. Abra um **Pull Request** no GitHub
-
-## 📜 Licença
-
-Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
----
-
 Desenvolvido por [Bismark William Melo Alves de Souza](https://github.com/seu-usuario) 🚀
 
