@@ -113,6 +113,8 @@ class CalculatorScreen extends StatelessWidget {
                             bloc.add(EqualPressed());
                           } else if (input == 'C') {
                             bloc.add(ClearPressed());
+                          } else if (input == 'CE') {
+                            bloc.add(ClearEntryPressed());
                           } else {
                             bloc.add(OperationPressed(input));
                           }}
