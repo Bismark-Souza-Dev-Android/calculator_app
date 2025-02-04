@@ -18,6 +18,8 @@ class ClearPressed extends CalculatorEvent {}
 
 class ClearEntryPressed extends CalculatorEvent {}
 
+class BackspacePressed extends CalculatorEvent {}
+
 class ButtonPressed extends CalculatorEvent {
   final String input;
 
@@ -36,4 +38,4 @@ class MemorySave extends CalculatorEvent {}
 
 class MemoryView extends CalculatorEvent {}
 
-class ButtonPercent extends CalculatorEvent {}
+class PercentPressed extends CalculatorEvent {}
