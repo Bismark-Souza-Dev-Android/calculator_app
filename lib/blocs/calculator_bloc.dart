@@ -22,6 +22,8 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
     on<ClearPressed>(_handleClearPressed);
     on<ButtonPressed>(_handleButtonPressed);
     on<ClearEntryPressed>(_handleClearEntryPressed);
+    on<BackspacePressed>(_handleBackspacePressed);
+    on<PercentPressed>(_handlePercentPressed);
   }
 
   void _handleNumberPressed(
@@ -63,6 +65,16 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
       _currentInput = '0';
     }
     emit(CalculatorLoaded(_getExpression(), _currentInput));
+  }
+
+  void _handleBackspacePressed(BackspacePressed event, Emitter<CalculatorState> emit) {
+    if (_currentInput.isNotEmpty) {
+      _currentInput = _currentInput.substring(0, _currentInput.length -1);
+    } else {
+      if (operation.isNotEmpty) {
+        _operation = '';
+      }
+    }
   }
 
   bool _isCalculationPossible() {
@@ -125,6 +137,7 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
     final Map<String, CalculatorEvent> eventMap = {
       'C': ClearPressed(),
       'CE': ClearEntryPressed(),
+      '<=': BackspacePressed(),
       '=': EqualPressed(),
       '+': OperationPressed('+'),
       '-': OperationPressed('-'),

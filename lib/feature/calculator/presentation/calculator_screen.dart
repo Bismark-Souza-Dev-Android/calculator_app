@@ -94,7 +94,11 @@ class CalculatorScreen extends StatelessWidget {
                         bloc.add(ClearPressed());
                       } else {
                         bloc.add(OperationPressed(input));
-                      }
+                      } else if (input == 'CE') {
+                        bloc.add(ClearEntryPressed());
+                        } else if (input == '<=') {
+                        bloc.add(BackspacePressed());
+                        } 
                     },
                    isMemories: true,
                   ),
