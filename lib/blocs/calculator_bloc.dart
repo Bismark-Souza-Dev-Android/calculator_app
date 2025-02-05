@@ -67,13 +67,27 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
     emit(CalculatorLoaded(_getExpression(), _currentInput));
   }
 
-  void _handleBackspacePressed(BackspacePressed event, Emitter<CalculatorState> emit) {
+  void _handleBackspacePressed(
+      BackspacePressed event, Emitter<CalculatorState> emit) {
     if (_currentInput.isNotEmpty) {
-      _currentInput = _currentInput.substring(0, _currentInput.length -1);
-    } else {
-      if (operation.isNotEmpty) {
-        _operation = '';
-      }
+      _currentInput = _currentInput.substring(0, _currentInput.length - 1);
+    } else if (_operation.isNotEmpty) {
+      _operation = '';
+    } else if (_previousInput.isNotEmpty) {
+      _previousInput = _previousInput.substring(0, _previousInput.length - 1);
+    }
+
+    emit(CalculatorLoaded(
+        _getExpression(), _currentInput.isNotEmpty ? _currentInput : '0'));
+  }
+
+  void _handlePercentPressed(
+      PercentPressed event, Emitter<CalculatorState> emit) {
+    if (_currentInput.isNotEmpty) {
+      int number = int.tryParse(_currentInput) ?? 0;
+      double numberPercent = (number / 100) * 100;
+      _currentInput = numberPercent.toString();
+      emit(CalculatorLoaded(_getExpression(), _currentInput));
     }
   }
 
