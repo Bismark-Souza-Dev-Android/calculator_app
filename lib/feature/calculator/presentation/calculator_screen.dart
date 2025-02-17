@@ -88,19 +88,21 @@ class CalculatorScreen extends StatelessWidget {
                       final bloc = context.read<CalculatorBloc>();
                       if (RegExp(r'^\d+$').hasMatch(input)) {
                         bloc.add(NumberPressed(input));
-                      } else if (input == '=') {
-                        bloc.add(EqualPressed());
-                      } else if (input == 'C') {
-                        bloc.add(ClearPressed());
-                      } else {
-                        bloc.add(OperationPressed(input));
-                      } else if (input == 'CE') {
-                        bloc.add(ClearEntryPressed());
-                        } else if (input == '<=') {
-                        bloc.add(BackspacePressed());
-                        } 
+                      } else if (input == 'MC') {
+                        bloc.add(MemoryClear());
+                      } else if (input == 'MR') {
+                        bloc.add(MemoryRecall());
+                      } else if (input == 'M+') {
+                        bloc.add(MemoryAdd());
+                      } else if (input == 'M-') {
+                        bloc.add(MemorySubtract());
+                      } else if (input == 'MS') {
+                        bloc.add(MemorySave());
+                      } else if (input == 'Mv') {
+                        bloc.add(MemoryView());
+                      }
                     },
-                   isMemories: true,
+                    isMemories: true,
                   ),
                 ),
                 Expanded(
@@ -108,19 +110,25 @@ class CalculatorScreen extends StatelessWidget {
                   child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: CalculatorButtonGrid(
-                        items: _listButtons,
-                        onTap: (input) {
-                          final bloc = context.read<CalculatorBloc>();
-                          if (RegExp(r'^\d+$').hasMatch(input)) {
-                            bloc.add(NumberPressed(input));
-                          } else if (input == '=') {
-                            bloc.add(EqualPressed());
-                          } else if (input == 'C') {
-                            bloc.add(ClearPressed());
-                          } else {
-                            bloc.add(OperationPressed(input));
-                          }}
-                      )),
+                          items: _listButtons,
+                          onTap: (input) {
+                            final bloc = context.read<CalculatorBloc>();
+                            if (RegExp(r'^\d+$').hasMatch(input)) {
+                              bloc.add(NumberPressed(input));
+                            } else if (input == '=') {
+                              bloc.add(EqualPressed());
+                            } else if (input == 'C') {
+                              bloc.add(ClearPressed());
+                            } else if (input == 'CE') {
+                              bloc.add(ClearEntryPressed());
+                            } else if (input == '<=') {
+                              bloc.add(BackspacePressed());
+                            } else if (input == '%') {
+                              bloc.add(PercentPressed());
+                            } else {
+                              bloc.add(OperationPressed(input));
+                            }
+                          })),
                 )
               ],
             ),

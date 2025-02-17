@@ -29,7 +29,11 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
   void _handleNumberPressed(
       NumberPressed event, Emitter<CalculatorState> emit) {
     if (_currentInput.length >= _maxLength) return;
-    _currentInput += event.number;
+    if (_currentInput == '0' && event.number != '0') {
+      _currentInput = event.number;
+    } else {
+      _currentInput += event.number;
+    }
     emit(CalculatorLoaded(_getExpression(), _currentInput));
   }
 
@@ -58,18 +62,32 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
   void _handleClearEntryPressed(
       ClearEntryPressed event, Emitter<CalculatorState> emit) {
     if (_currentInput.isNotEmpty) {
-      _currentInput = _currentInput.substring(0, _currentInput.length - 1);
-      emit(CalculatorLoaded(_getExpression(), _currentInput));
+      _currentInput = '0';
     }
+    emit(CalculatorLoaded(_getExpression(), _currentInput));
   }
 
-  void _handleBackspacePressed(BackspacePressed event, Emitter<CalculatorState> emit) {
+  void _handleBackspacePressed(
+      BackspacePressed event, Emitter<CalculatorState> emit) {
     if (_currentInput.isNotEmpty) {
-      _currentInput = _currentInput.substring(0, _currentInput.length -1);
-    } else {
-      if (operation.isNotEmpty) {
-        _operation = '';
-      }
+      _currentInput = _currentInput.substring(0, _currentInput.length - 1);
+    } else if (_operation.isNotEmpty) {
+      _operation = '';
+    } else if (_previousInput.isNotEmpty) {
+      _previousInput = _previousInput.substring(0, _previousInput.length - 1);
+    }
+
+    emit(CalculatorLoaded(
+        _getExpression(), _currentInput.isNotEmpty ? _currentInput : '0'));
+  }
+
+  void _handlePercentPressed(
+      PercentPressed event, Emitter<CalculatorState> emit) {
+    if (_currentInput.isNotEmpty) {
+      int number = int.tryParse(_currentInput) ?? 0;
+      double numberPercent = (number / 100) * 100;
+      _currentInput = numberPercent.toString();
+      emit(CalculatorLoaded(_getExpression(), _currentInput));
     }
   }
 
@@ -101,7 +119,7 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
         return 'Erro';
     }
 
-    if (result.isNaN) return 'Error';
+    if (result.isNaN) return 'Não é possível dividir por zero';
     String formattedResult = result % 1 == 0
         ? result.toInt().toString()
         : result
@@ -149,8 +167,8 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
 
     if (eventMap.containsKey(input)) {
       add(eventMap[input]!);
-    } else {
-      add(NumberPressed((input)));
+    } else if (RegExp(r'^[0-9]$').hasMatch(input)) {
+      add(NumberPressed(input));
     }
   }
 
