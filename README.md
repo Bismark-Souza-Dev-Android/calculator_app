@@ -11,7 +11,8 @@ Este projeto é uma calculadora desenvolvida em Flutter utilizando o padrão de 
 - ✅ Implementação do estado gerenciado com **Flutter BLoC**.
 - ✅ Arquivamento de variáveis em memoria.
 - ✅ Equações e raiz quadrada.
-- 🚧 Futuras melhorias: memória de cálculos, suporte a porcentagem, funções científicas.
+- ✅ Memória de cálculos, suporte a porcentagem
+- 🚧 Futuras melhorias: funções científicas, conversores unidades de medida, conversor de moedas (conectado API).
 
 ## 🏗️ Tecnologias Utilizadas
 
