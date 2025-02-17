@@ -39,3 +39,11 @@ class MemorySave extends CalculatorEvent {}
 class MemoryView extends CalculatorEvent {}
 
 class PercentPressed extends CalculatorEvent {}
+
+class ReciprocalPressed extends CalculatorEvent {}
+
+class SquaredPressed extends CalculatorEvent {}
+
+class DecimalPressed extends CalculatorEvent {}
+
+class SquareRootPressed extends CalculatorEvent {}
