@@ -11,4 +11,6 @@ class AppColors {
   static const Color gradientFinalFieldColor = Color(0xFFF57F17);
   static const Color memoryButtonColor = Color(0xFF2F2D27);
   static const Color memoryTextUnselectedColor = Color(0xFF606060);
+  static const Color buttonGreenColor = Color(0xFF88FA00);
+  static const Color blackColor = Color(0xFF000000);
 }

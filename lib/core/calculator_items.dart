@@ -1,7 +1,7 @@
 class CalculatorListItems {
   static List<String> getListButtons() {
     return [
-      '%', 'CE', 'C', '<=',
+      'C', 'CE', '<=','%',
       '¹/x', 'x²','²√x','÷',
       '7', '8', '9','×',
       '4', '5', '6', '-',
@@ -11,7 +11,7 @@ class CalculatorListItems {
   }
   static List<String> getListMemories() {
     return [
-      'MC', 'MR', 'M+', 'M-', 'MS', 'Mv'
+      'Mc', 'Mr', 'M+', 'M-', 'Ms', 'Mv'
     ];
   }
 }
