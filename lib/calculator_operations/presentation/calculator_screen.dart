@@ -32,7 +32,8 @@ class CalculatorScreen extends StatelessWidget {
         body: BlocBuilder<CalculatorBloc, CalculatorState>(
           builder: (context, state) {
             return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 10),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 30.0, horizontal: 10),
               child: Center(
                 child: Column(
                   children: [
@@ -46,8 +47,7 @@ class CalculatorScreen extends StatelessWidget {
                             gradient: LinearGradient(colors: [
                               AppColors.gradientInitialFieldColor
                                   .withValues(alpha: 0.7),
-                              AppColors.equalButtonColor
-                                  .withValues(alpha: 0.5)
+                              AppColors.equalButtonColor.withValues(alpha: 0.5)
                             ])),
                         child: BlocListener<CalculatorBloc, CalculatorState>(
                           listener: (context, state) {
@@ -79,9 +79,9 @@ class CalculatorScreen extends StatelessWidget {
                                   textAlign: TextAlign.right,
                                   style: const TextStyle(
                                     color: Colors.white,
-                                    fontSize: 40,
+                                    fontSize: 30,
                                   ),
-                                ),
+                                )
                               ],
                             ),
                           ),

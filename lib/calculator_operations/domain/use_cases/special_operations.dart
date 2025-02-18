@@ -54,4 +54,19 @@ class SpecialOperations {
             .replaceAll(RegExp(r'0+$'), '')
             .replaceAll(RegExp(r'\.$'), '');
   }
+
+  static String plusMinus(String input) {
+    final number = double.tryParse(input);
+
+    if (number == null || number == 0) {
+      return '0';
+    }
+    final result = (number * -1);
+    return result % 1 == 0
+        ? result.toInt().toString()
+        : result
+        .toStringAsPrecision(10)
+        .replaceAll(RegExp(r'0+$'), '')
+        .replaceAll(RegExp(r'\.$'), '');
+}
 }

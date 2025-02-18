@@ -47,3 +47,5 @@ class SquaredPressed extends CalculatorEvent {}
 class DecimalPressed extends CalculatorEvent {}
 
 class SquareRootPressed extends CalculatorEvent {}
+
+class PlusMinusPressed extends CalculatorEvent {}

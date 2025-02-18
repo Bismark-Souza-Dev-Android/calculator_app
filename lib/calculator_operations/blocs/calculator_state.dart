@@ -1,6 +1,6 @@
 abstract class CalculatorState {
   final String expression;
-  final String result;
+final String result;
   final bool hasMemory;
 
   const CalculatorState(this.expression, this.result, {this.hasMemory = false});
@@ -18,6 +18,10 @@ class CalculatorLoaded extends CalculatorState {
 class CalculatorMemoryView extends CalculatorState {
   final String memoryValue;
 
-  const CalculatorMemoryView(this.memoryValue, {super.hasMemory = true})
-      : super('', '');
+  const CalculatorMemoryView({
+    required this.memoryValue,
+    required String expression,
+    required String result,
+    bool hasMemory = true,
+  }) : super(expression, result, hasMemory: hasMemory);
 }

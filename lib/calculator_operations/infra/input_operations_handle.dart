@@ -28,10 +28,16 @@ class InputOperationsHandle {
       case '=':
         bloc.add(EqualPressed());
         break;
-      case '+' || '-' || '×' || '÷':
+      case '+':
+      case '-':
+      case '×':
+      case '÷':
         bloc.add(OperationPressed(input));
         break;
-        case ',':
+      case '+/-':
+        bloc.add(PlusMinusPressed());
+        break;
+      case ',':
         bloc.add(DecimalPressed());
         break;
       default:

@@ -32,12 +32,20 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
     on<DecimalPressed>(_handleDecimalPressed);
     on<SquareRootPressed>(_handleSquareRootPressed);
     on<SquaredPressed>(_handleSquaredPressed);
+    on<PlusMinusPressed>(_handlePlusMinusPressed);
   }
 
   void _handleSquareRootPressed(SquareRootPressed event,
       Emitter<CalculatorState> emit) {
     if (_currentInput.isEmpty) return;
     _currentInput = SpecialOperations.squareRoot(_currentInput);
+    _shouldReset = true;
+    emit(CalculatorLoaded(_getExpression(), _currentInput));
+  }
+
+  void _handlePlusMinusPressed(PlusMinusPressed event,
+      Emitter<CalculatorState> emit) {
+    _currentInput = SpecialOperations.plusMinus(_currentInput);
     emit(CalculatorLoaded(_getExpression(), _currentInput));
   }
 
@@ -45,12 +53,14 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
       Emitter<CalculatorState> emit) {
     if (_currentInput.isEmpty) return;
     _currentInput = SpecialOperations.squared(_currentInput);
+    _shouldReset = true;
     emit(CalculatorLoaded(_getExpression(), _currentInput));
   }
 
   void _handleReciprocalPressed(ReciprocalPressed event,
       Emitter<CalculatorState> emit) {
     _currentInput = SpecialOperations.reciprocal(_currentInput);
+    _shouldReset = true;
     emit(CalculatorLoaded(_getExpression(), _currentInput));
   }
 
@@ -72,19 +82,18 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
     emit(CalculatorLoaded(_getExpression(), _currentInput));
   }
 
-  void _handleOperationPressed(OperationPressed event,
-      Emitter<CalculatorState> emit) {
-    if (_currentInput.isEmpty && _previousInput.isEmpty) {
-      _operation = event.operation;
+  void _handleOperationPressed(OperationPressed event, Emitter<CalculatorState> emit) {
+    if (_currentInput.isEmpty) {
+      _previousInput = '0';
     } else {
-      if(_currentInput.isNotEmpty) {
-        _previousInput = _currentInput;
-        _currentInput = '';
-      }
-      _operation = event.operation;
+      _previousInput = _currentInput;
+      _currentInput = '';
     }
-    emit(CalculatorLoaded(_getExpression(), ''));
+    _operation = event.operation;
+    emit(CalculatorLoaded(_getExpression(), _currentInput));
   }
+
+
 
   void _handleEqualPressed(EqualPressed event, Emitter<CalculatorState> emit) {
     if (_isCalculationPossible()) {
@@ -127,7 +136,7 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
 
   String _calculateResult() {
     _currentInput = BasicOperations.basicOperations(
-        _currentInput, _previousInput, _operation);
+        _previousInput, _currentInput, _operation);
     return _currentInput;
   }
 
@@ -174,8 +183,12 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
   }
 
   void _handleMemoryView(MemoryView event, Emitter<CalculatorState> emit) {
-    if (_memoryOperations.hasMemory()) {
-      emit(CalculatorMemoryView(_memoryOperations.recall()));
-    }
+    final memoryValue = _memoryOperations.recall();
+    emit(CalculatorMemoryView(
+      memoryValue: memoryValue,
+      expression: _getExpression(),
+      result: _currentInput,
+    ));
   }
+
 }

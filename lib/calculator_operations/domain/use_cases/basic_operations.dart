@@ -22,7 +22,7 @@ class BasicOperations {
         return 'Erro';
     }
 
-    if (result.isNaN) return 'Não é possível dividir por zero';
+    if (result.isNaN) return 'Erro ao Dividir por zero';
     String formattedResult = result % 1 == 0
         ? result.toInt().toString()
         : result
