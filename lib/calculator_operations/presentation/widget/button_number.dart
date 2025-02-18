@@ -6,13 +6,14 @@ class ButtonNumber extends StatefulWidget {
   final void Function() onTap;
   final Color buttonColor;
   final Color textColor;
+  final IconData? icon;
 
   const ButtonNumber({
     super.key,
     required this.number,
     required this.onTap,
     required this.buttonColor,
-    required this.textColor,
+    required this.textColor, this.icon,
   });
 
   @override
@@ -45,7 +46,7 @@ class _ButtonNumberState extends State<ButtonNumber> {
               color: _isColor ? AppColors.secondaryColor : widget.buttonColor,
               borderRadius: BorderRadius.circular(50)),
           child: Center(
-              child: Text(
+              child: widget.icon != null ? Icon(widget.icon, size: 30, color: widget.textColor,) : Text(
             widget.number,
             style: TextStyle(fontSize: 30, color: widget.textColor),
           )),

@@ -37,6 +37,7 @@ class CalculatorButtonGrid extends StatelessWidget {
         )
             : ButtonNumber(
           number: items[index],
+          icon: items[index] == '<=' ? Icons.backspace : null,
           onTap: () {
             onTap(items[index]);
           },
